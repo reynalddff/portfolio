@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLIK O2O: Case Study v1 (Bento Brief)</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="homepage.css">
+<style>
+  .v1-hero { padding: 90px 0 0; }
+  .v1-cover { border: 3px solid var(--edge); box-shadow: 9px 9px 0 var(--edge); overflow: hidden; margin-top: 28px; aspect-ratio: 21/9; background: var(--pop2); }
+  .v1-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 120px; gap: 18px; margin-top: 40px; }
+  .bento > div { border: 3px solid var(--edge); background: var(--card); box-shadow: 7px 7px 0 var(--edge); padding: 20px; display: flex; flex-direction: column; justify-content: center; }
+  .bento .summary { grid-column: span 2; grid-row: span 2; justify-content: flex-start; }
+  .bento .summary p { font-size: 15px; line-height: 1.6; color: var(--dim); margin-top: 10px; }
+  .bento .stat { background: var(--pop); align-items: center; text-align: center; }
+  .bento .stat b { font-family: Anton, sans-serif; font-size: clamp(26px, 3vw, 40px); color: #111; line-height: 1; }
+  .bento .stat span { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #001c47; margin-top: 6px; }
+  .bento .meta b { display: block; font-family: Anton, sans-serif; font-size: 13px; letter-spacing: .06em; color: var(--pop); text-transform: uppercase; margin-bottom: 4px; }
+  .bento .meta span { font-size: 14px; font-weight: 700; }
+  .bento .tags-cell { grid-column: span 2; flex-direction: row; flex-wrap: wrap; gap: 7px; align-items: center; }
+  @media (max-width: 880px) { .bento { grid-template-columns: repeat(2, 1fr); } .bento .summary, .bento .tags-cell { grid-column: span 2; } }
+
+  .body-layout { display: grid; grid-template-columns: 220px 1fr; gap: 48px; margin-top: 96px; align-items: start; }
+  .toc { position: sticky; top: 90px; }
+  .toc .n { font-family: Anton, sans-serif; color: var(--pop); font-size: 12px; letter-spacing: .1em; margin-bottom: 10px; text-transform: uppercase; }
+  .toc a { display: block; font-size: 13px; font-weight: 700; padding: 8px 0; border-top: 2px solid var(--edge); }
+  .toc a:hover { color: var(--pop); }
+  .chapter { margin-bottom: 72px; }
+  .chapter h2 { font-family: Anton, sans-serif; font-size: clamp(24px, 3vw, 36px); text-transform: uppercase; margin-bottom: 18px; }
+  .chapter p { font-size: 15.5px; line-height: 1.75; color: var(--dim); margin-bottom: 14px; max-width: 68ch; }
+  .chapter .frame { border: 3px solid var(--edge); box-shadow: 8px 8px 0 var(--edge); overflow: hidden; margin: 24px 0; background: var(--pop2); }
+  .chapter .frame img { width: 100%; display: block; }
+  .chapter ul { margin: 10px 0 14px 20px; }
+  .chapter li { font-size: 15px; color: var(--dim); line-height: 1.7; }
+  @media (max-width: 880px) { .body-layout { grid-template-columns: 1fr; } .toc { position: static; display: flex; gap: 10px; overflow-x: auto; } .toc a { border-top: none; border-left: 2px solid var(--edge); padding: 0 10px; white-space: nowrap; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="mark" href="index.html#top">REYNALD<span>.</span></a>
+    <div class="links">
+      <a href="index.html#top">Home</a>
+      <a href="index.html#work">Case Study</a>
+      <a href="index.html#profile">Profile</a>
+    </div>
+    <button id="themeBtn" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+      <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.2 8.2 0 1 1 9.8 4a6.4 6.4 0 0 0 10.2 10.2Z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="wrap v1-hero">
+  <div class="vlabel">FLIK</div>
+  <h1 class="title" style="margin-bottom:0">FLIK O2O: Where Offline Meets Online</h1>
+  <div class="v1-cover"><img src="https://images.ctfassets.net/ued1jttx7crp/2z6OsfUFWPXig1y5MUYnLk/0a1fceb9706f1cedd5706806de6364fd/image.png" alt="FLIK O2O"></div>
+
+  <div class="bento">
+    <div class="summary">
+      <b style="font-family:Anton,sans-serif;font-size:13px;letter-spacing:.06em;color:var(--pop);text-transform:uppercase">Summary</b>
+      <p>Turned FLIK's messy offline-to-online purchase tracking into a working O2O checkout flow, connecting in-store sales to their digital system without EDC machines.</p>
+    </div>
+    <div class="stat"><b>Rp6B+</b><span>GMV, first month</span></div>
+    <div class="stat"><b>60%</b><span>GMV increase</span></div>
+    <div class="meta"><b>Role</b><span>Product Designer</span></div>
+    <div class="meta"><b>Year</b><span>2025</span></div>
+    <div class="tags-cell">
+      <span class="badge hi">O2O</span>
+      <span class="badge">Checkout</span>
+      <span class="badge">Product Design</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap body-layout">
+  <div class="toc">
+    <div class="n">Contents</div>
+    <a href="#situation">01 · Situation</a>
+    <a href="#goals">02 · Goals</a>
+    <a href="#found">03 · What We Found</a>
+    <a href="#solution">04 · Solution</a>
+    <a href="#result">05 · Result</a>
+  </div>
+  <div>
+    <div class="chapter" id="situation">
+      <h2>The Situation</h2>
+      <p>FLIK was growing fast online, but when it came to offline stores, there was a problem: no EDC machines, no easy way to link in-store purchases to their digital system. Cashiers had to manually collect customer info: messy, slow, and nobody liked it. We needed to fix it, fast.</p>
+    </div>
+    <div class="chapter" id="goals">
+      <h2>Goals</h2>
+      <ul>
+        <li><b>Create a seamless, fast flow:</b> cashiers complete tasks with minimal friction.</li>
+        <li><b>Activate shoppers online:</b> instantly, right after an offline transaction.</li>
+        <li><b>Motivate cashiers:</b> not just to process payments, but to consistently collect and link shopper data.</li>
+      </ul>
+    </div>
+    <div class="chapter" id="found">
+      <h2>What We Found</h2>
+      <p>Field visits + cashier interviews surfaced three blunt truths: cashiers are super busy and don't have time for anything complicated; manual data collection produces lots of mistakes; if it's not simple and rewarding, they won't use it.</p>
+      <div class="frame"><img src="https://images.ctfassets.net/ued1jttx7crp/6JL6WPX0UAv2x2fMnaeMOo/463d6f11e7ffc1bda89bfa2c442e0cbe/pexels-rdne-7888983.jpg" alt="Talking to users in the field"></div>
+    </div>
+    <div class="chapter" id="solution">
+      <h2>Introducing FLIK O2O</h2>
+      <p>FLIK O2O connects what happens in-store with what happens online via FLIK QRIS. Shoppers scan a unique QR code at checkout with any mobile banking app or e-wallet, instantly linking their data so merchants can track purchases and grow with a connected experience.</p>
+      <div class="frame"><img src="https://images.ctfassets.net/ued1jttx7crp/3AT6IA1thJJxBMc4Qf659p/8e26b8ff59c6fceaca94d6bd3167ad66/image.png" alt="FLIK QRIS flow"></div>
+    </div>
+    <div class="chapter" id="result">
+      <h2>Result</h2>
+      <p>Launched within 3–4 weeks at Erigo, Teras Jahe, and Emado's Shawarma. FLIK O2O generated over Rp6 billion in GMV in its first month, pushing FLIK's total GMV from Rp10B to Rp16B: a 60% increase.</p>
+    </div>
+  </div>
+</div>
+
+<footer style="margin-top:60px">
+  <div class="wrap">
+    <span>&copy; 2026 Reynald · v1 Bento Brief</span>
+    <a href="index.html">&larr; Back to homepage</a>
+  </div>
+</footer>
+
+<script>
+const root=document.documentElement,tb=document.getElementById('themeBtn');
+tb.onclick=()=>{const d=root.dataset.theme==='dark';root.dataset.theme=d?'light':'dark';tb.setAttribute('aria-pressed',String(!d));};
+</script>
+</body>
+</html>
