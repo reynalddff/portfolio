@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLIK O2O: Case Study</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="homepage.css">
+<style>
+  .layout { display: grid; grid-template-columns: 300px 1fr; gap: 0; padding-top: 60px; min-height: 100vh; }
+  .toc-panel { position: sticky; top: 60px; height: calc(100vh - 60px); border-right: 3px solid var(--edge); padding: 48px 28px; overflow-y: auto; }
+  .toc-panel .eyebrow { font-family: Anton, sans-serif; font-size: 12px; letter-spacing: .1em; color: var(--pop); text-transform: uppercase; margin-bottom: 18px; }
+  .toc-panel nav a { display: block; font-size: 14px; font-weight: 700; padding: 9px 0; border-top: 2px solid var(--edge); }
+  .toc-panel nav a:first-child { border-top: none; }
+  .toc-panel nav a:hover { color: var(--pop); }
+  .toc-panel nav a.lvl-h1 { font-family: Anton, sans-serif; text-transform: uppercase; font-size: 15px; letter-spacing: .01em; }
+  .toc-panel nav a.lvl-h3 { padding-left: 16px; font-weight: 500; font-size: 13px; color: var(--dim); border-top: none; }
+
+  .content { padding: 64px 56px; max-width: 760px; }
+  .content .vlabel { margin-bottom: 20px; }
+  .content h1 { font-family: Anton, sans-serif; font-size: clamp(30px, 4vw, 48px); text-transform: uppercase; line-height: 1; margin-bottom: 16px; }
+  .content .summary { font-size: 16.5px; line-height: 1.7; color: var(--dim); max-width: 60ch; margin-bottom: 24px; }
+  .content .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 8px; }
+  .content h2 { font-family: Anton, sans-serif; font-size: clamp(22px, 2.8vw, 32px); text-transform: uppercase; margin: 56px 0 16px; scroll-margin-top: 80px; }
+  .content h3 { font-family: Anton, sans-serif; font-size: clamp(16px, 1.8vw, 20px); text-transform: uppercase; margin: 32px 0 12px; color: var(--pop); scroll-margin-top: 80px; }
+  .content p { font-size: 16px; line-height: 1.8; color: var(--dim); margin-bottom: 14px; }
+  .content ul { margin: 12px 0 14px 20px; }
+  .content li { font-size: 15.5px; color: var(--dim); line-height: 1.75; }
+  .content .frame { border: 3px solid var(--edge); box-shadow: 8px 8px 0 var(--edge); overflow: hidden; margin: 28px 0; background: var(--pop2); }
+  .content .frame img { width: 100%; display: block; }
+  .content .stat-row { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 20px; }
+  .content .stat-row div b { font-family: Anton, sans-serif; font-size: 30px; color: var(--pop); display: block; }
+  .content .stat-row div span { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--dim); }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc-panel { position: static; height: auto; border-right: none; border-bottom: 3px solid var(--edge); }
+    .content { padding: 48px 22px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="mark" href="index.html#top">REYNALD<span>.</span></a>
+    <div class="links">
+      <a href="index.html#top">Home</a>
+      <a href="index.html#work">Case Study</a>
+      <a href="index.html#profile">Profile</a>
+    </div>
+    <button id="themeBtn" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+      <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.2 8.2 0 1 1 9.8 4a6.4 6.4 0 0 0 10.2 10.2Z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="toc-panel">
+    <div class="eyebrow">Contents</div>
+    <nav>
+      <a class="lvl-h1" href="#top">FLIK O2O</a>
+      <a class="lvl-h2" href="#situation">The Situation</a>
+      <a class="lvl-h2" href="#goals">Goals</a>
+      <a class="lvl-h2" href="#found">What We Found</a>
+      <a class="lvl-h2" href="#solution">Introducing FLIK O2O</a>
+      <a class="lvl-h2" href="#hifi">High-Fidelity Design</a>
+      <a class="lvl-h3" href="#login-flow">Login Flow for Cashier</a>
+      <a class="lvl-h3" href="#phone-input">Input Data (Phone Number)</a>
+      <a class="lvl-h2" href="#result">Result</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div id="top"></div>
+    <div class="vlabel">FLIK</div>
+    <h1>FLIK O2O: Where Offline Meets Online</h1>
+    <p class="summary">Turned FLIK's messy offline-to-online purchase tracking into a working O2O checkout flow, connecting in-store sales to their digital system without EDC machines.</p>
+    <div class="tags">
+      <span class="badge hi">O2O</span>
+      <span class="badge">Checkout</span>
+      <span class="badge">Product Design</span>
+      <span class="badge">Product Designer · 2025</span>
+    </div>
+
+    <h2 id="situation">The Situation</h2>
+    <p>FLIK was growing fast online, but when it came to offline stores, there was a problem: no EDC machines, no easy way to link in-store purchases to their digital system. Cashiers had to manually collect customer info: messy, slow, and nobody liked it. We needed to fix it, fast.</p>
+
+    <h2 id="goals">Goals</h2>
+    <ul>
+      <li>Create a seamless, fast flow for cashiers with minimal friction.</li>
+      <li>Activate shoppers online immediately after an offline transaction.</li>
+      <li>Motivate cashiers to consistently collect and link shopper data.</li>
+    </ul>
+
+    <h2 id="found">What We Found</h2>
+    <p>Field visits and cashier interviews surfaced three blunt truths: cashiers are super busy and don't have time for anything complicated, manual data collection produces lots of mistakes, and if it's not simple and rewarding, they won't use it.</p>
+    <div class="frame"><img src="https://images.ctfassets.net/ued1jttx7crp/6JL6WPX0UAv2x2fMnaeMOo/463d6f11e7ffc1bda89bfa2c442e0cbe/pexels-rdne-7888983.jpg" alt="Talking to users in the field"></div>
+
+    <h2 id="solution">Introducing FLIK O2O</h2>
+    <p>FLIK O2O connects what happens in-store with what happens online via FLIK QRIS. Shoppers scan a unique QR code at checkout with any mobile banking app or e-wallet, instantly linking their data so merchants can track purchases and grow with a connected experience.</p>
+    <div class="frame"><img src="https://images.ctfassets.net/ued1jttx7crp/3AT6IA1thJJxBMc4Qf659p/8e26b8ff59c6fceaca94d6bd3167ad66/image.png" alt="FLIK QRIS flow"></div>
+
+    <h2 id="hifi">High-Fidelity Design</h2>
+    <p>From the stakeholder meetings, we mapped a user flow for offline transactions and built a simple cashier UI on top of it.</p>
+
+    <h3 id="login-flow">Login Flow for Cashier</h3>
+    <p>If the Cashier Web App is opened without logging in, the user is redirected to the login page. After entering a valid email and password, a session starts and the cashier is taken to the shopper's phone-number input. Login also tracks data and gives incentives: FLIK Points worth 10% per transaction, up to Rp10,000.</p>
+    <div class="frame"><img src="https://images.ctfassets.net/ued1jttx7crp/6tnuB3uOJVkAHeBzcO3CNy/2c85aab1859a77ed2f4eb6963d43dd04/image.png" alt="Cashier login flow"></div>
+
+    <h3 id="phone-input">Input Data (Phone Number)</h3>
+    <p>The shopper phone-number page is the first step: the app auto-formats the number, removing a leading "62" or "0" so it starts with "8." Once valid, the app checks whether the shopper is new or existing, then routes to the right detail page.</p>
+    <div class="frame"><img src="https://images.ctfassets.net/ued1jttx7crp/2y9gmMlcxi300Jbu68taPU/15c4d5762f370991513af853635fe375/image.png" alt="Phone number input flow"></div>
+
+    <h2 id="result">Result</h2>
+    <p>Launched within 3&ndash;4 weeks at Erigo, Teras Jahe, and Emado's Shawarma. FLIK O2O generated over Rp6 billion in GMV in its first month, pushing FLIK's total GMV from Rp10B to Rp16B: a 60% increase.</p>
+    <div class="stat-row">
+      <div><b>Rp6B+</b><span>GMV, first month</span></div>
+      <div><b>60%</b><span>GMV increase</span></div>
+      <div><b>3&ndash;4wk</b><span>time to launch</span></div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Reynald</span>
+    <a href="index.html">&larr; Back to homepage</a>
+  </div>
+</footer>
+
+<script>
+const root=document.documentElement,tb=document.getElementById('themeBtn');
+tb.onclick=()=>{const d=root.dataset.theme==='dark';root.dataset.theme=d?'light':'dark';tb.setAttribute('aria-pressed',String(!d));};
+</script>
+</body>
+</html>
