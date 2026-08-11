@@ -16,6 +16,7 @@ export async function fetchCaseStudy(slug) {
     content_type: 'caseStudy',
     'fields.slug': slug,
     limit: 1,
+    include: 10,
   })
   const entry = items[0]
   if (!entry) return null

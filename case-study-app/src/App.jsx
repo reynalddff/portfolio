@@ -1,7 +1,18 @@
 import { useEffect, useState } from 'react'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { BLOCKS } from '@contentful/rich-text-types'
 import { fetchCaseStudy } from './contentfulClient'
 import './App.css'
+
+const richTextOptions = {
+  renderNode: {
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      const file = node.data?.target?.fields?.file
+      if (!file?.url) return null
+      return <img src={`https:${file.url}`} alt={node.data.target.fields.title || ''} loading="lazy" />
+    },
+  },
+}
 
 function useTheme() {
   const [dark, setDark] = useState(false)
@@ -96,7 +107,7 @@ export default function App() {
         )}
         {cs.body && (
           <div className="cs-body">
-            {documentToReactComponents(cs.body)}
+            {documentToReactComponents(cs.body, richTextOptions)}
           </div>
         )}
         {cs.gallery?.length > 0 && (
