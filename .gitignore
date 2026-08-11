@@ -1,0 +1,9 @@
+.agents/
+.claude/
+.impeccable/
+skills-lock.json
+
+node_modules/
+.env
+.env.local
+dist-tmp/
