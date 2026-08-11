@@ -216,27 +216,28 @@ pause "Press Enter once the space exists..."
 CONTENTFUL_SPACE_ID=""
 ask CONTENTFUL_SPACE_ID "Contentful Space ID:"
 
-# ── Stage 4: content type — import caseStudy ───────────────────────────────
-stage "Content type — import caseStudy"
-say "contentful-schema/caseStudy.json has your case-study fields ready to go —"
-say "the Contentful CLI imports it as a content type in one shot."
+# ── Stage 4: content type — migrate caseStudy ──────────────────────────────
+stage "Content type — create caseStudy"
+say "contentful-schema/caseStudy.migration.js defines your case-study fields —"
+say "the Contentful CLI applies it as a content type in one shot."
+MIGRATE_CMD="contentful space migration --space-id $CONTENTFUL_SPACE_ID --environment-id master --yes contentful-schema/caseStudy.migration.js"
 if ! command -v contentful >/dev/null 2>&1; then
   if confirm "contentful-cli not found — install it now (npm install -g contentful-cli)?"; then
     npm install -g contentful-cli
   else
-    SKIPPED+=("install contentful-cli, then run: contentful space import --content-file contentful-schema/caseStudy.json --space-id $CONTENTFUL_SPACE_ID --environment-id master")
+    SKIPPED+=("install contentful-cli, then run: $MIGRATE_CMD")
   fi
 fi
 if command -v contentful >/dev/null 2>&1; then
   say "This opens a browser login the first time (contentful login)."
   contentful login || true
-  if confirm "Import contentful-schema/caseStudy.json into space $CONTENTFUL_SPACE_ID now?"; then
-    contentful space import --content-file contentful-schema/caseStudy.json --space-id "$CONTENTFUL_SPACE_ID" --environment-id master
+  if confirm "Create the caseStudy content type in space $CONTENTFUL_SPACE_ID now?"; then
+    $MIGRATE_CMD
   else
-    SKIPPED+=("run: contentful space import --content-file contentful-schema/caseStudy.json --space-id $CONTENTFUL_SPACE_ID --environment-id master")
+    SKIPPED+=("run: $MIGRATE_CMD")
   fi
 else
-  warn "skipping import — do it later with the command above."
+  warn "skipping content-type creation — do it later with the command above."
 fi
 
 # ── Stage 5: API key — Content Delivery API ────────────────────────────────

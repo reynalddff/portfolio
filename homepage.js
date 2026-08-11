@@ -8,7 +8,7 @@ document.getElementById('mq').innerHTML=(()=>{const s='<span>Usability Testing</
 /* Case studies: fetched from Contentful, no build step here — update once the space exists */
 const CONTENTFUL_SPACE_ID='ued1jttx7crp';
 const CONTENTFUL_ENVIRONMENT='master';
-const CONTENTFUL_ACCESS_TOKEN='yuRyV9uw3_yJowAGYgXLa9bQznx1YouthIl8IzUah94yuRyV9uw3_yJowAGYgXLa9bQznx1YouthIl8IzUah94yuRyV9uw3_yJowAGYgXLa9bQznx1YouthIl8IzUah94';
+const CONTENTFUL_ACCESS_TOKEN='yuRyV9uw3_yJowAGYgXLa9bQznx1YouthIl8IzUah94';
 const CASE_STUDY_LIST_URL=`https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/environments/${CONTENTFUL_ENVIRONMENT}/entries?access_token=${CONTENTFUL_ACCESS_TOKEN}&content_type=caseStudy&order=-fields.year&include=1&select=fields.title,fields.summary,fields.slug,fields.coverImage`;
 fetch(CASE_STUDY_LIST_URL)
  .then(r=>r.json())
