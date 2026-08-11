@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UX Portfolio by Reynald</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="homepage.css">
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="mark" href="#top">REYNALD<span>.</span></a>
+  <div class="links"><a href="#top">Home</a><a href="#work">Case Study</a><a href="#profile">Profile</a><a href="https://docs.google.com/document/d/1_1jKttusff1OLHlpOVcJbrYGVFzZL4DWwS2hLrMPuPU/edit?tab=t.0" target="_blank" rel="noopener noreferrer">Resume</a></div>
+  <button id="themeBtn" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+    <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+    <svg class="i-moon" viewBox="0 0 24 24"><path d="M20 14.2A8.2 8.2 0 1 1 9.8 4a6.4 6.4 0 0 0 10.2 10.2Z"/></svg>
+  </button>
+</div></nav>
+
+<header id="top">
+  <canvas id="tiles"></canvas>
+  <div class="wrap hero">
+    <span class="tagline">Product designer · 5+ YOE · Jakarta</span>
+    <!-- <h1><span class="l1">Loud</span><br><span class="l2">Work,</span><br><span class="l3">Quiet UI.</span></h1> -->
+    <h1><span class="l1">I design B2B products with AI,</span><br><span class="l3">built to move metrics,</span><br><span class="l2">not just  screens</span></h1>
+    <div class="heroFoot">
+    <p>B2B Product Designer with 5 years in SaaS and a Master of Information Technology, turning complex workflows <br> and emerging AI capabilities into scalable products with measurable business impact.</p>
+  </div>
+  </div>
+</header>
+
+<div class="marquee"><div id="mq"></div></div>
+
+<section id="work"><div class="wrap">
+  <div class="title">Case Studies</div>
+  <!-- <div class="sublab">Four shipped systems · 2023 — 2026</div> -->
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="testimonials"><div class="wrap">
+  <div class="vlabel">What Clients Say</div>
+  <div class="t1" id="t1"></div>
+</div></section>
+
+<section id="profile"><div class="wrap">
+  <div class="title">AboutMe</div>
+  <!-- <div class="sublab">Profile · Experience · Education</div> -->
+  <div class="about">
+    <div class="reveal">
+      <div class="portrait"><img loading="lazy" alt="Rajwa portrait placeholder" src="https://picsum.photos/seed/rajwa-portrait/440/560"></div>
+      <!-- <p class="blockquote">I count things <em>before</em> I draw things.</p> -->
+      <p class="body">I am a Product Designer with a Master’s in Information Technology and over 5 years of experience. I specialize in untangling the "hard parts" of B2B SaaS, Fintech and E-Commerce transforming complex enterprise workflows into intuitive, high-adoption products. From scaling subscription conversions by 200% at SIRCLO to driving Rp6B GMV through offline activation flows at FLIK, I build for measurable impact rather than just aesthetics. My technical background allows me to bridge the gap between design and engineering, ensuring scalable systems survive the handoff and move the numbers that matter: activation, adoption, and retention.</p>
+    </div>
+    <div class="slab reveal">
+      <h4>Experience</h4>
+      <div class="list">
+        <div class="li"><time>2025 - 2026</time><div><b>Associate Product Manager</b><span>FLIK</span></div></div>
+        <div class="li"><time>2023 - 2026</time><div><b>ProductDesigner</b><span>FLIK</span></div></div>
+        <div class="li"><time>2023</time><div><b>UI/UX Design Mentor</b><span>Rakamin Academy</span></div></div>
+        <div class="li"><time>2022</time><div><b>UI/UX Design Mentor</b><span>SKILVUL</span></div></div>
+        <div class="li"><time>2022</time><div><b>Associate UI/UX Designer</b><span>SIRCLO</span></div></div>
+        <div class="li"><time>2021 - 2022</time><div><b>Product Designer Internship</b><span>Apple Developer Academy</span></div></div>
+      </div>
+      <h4>Education</h4>
+      <div class="list">
+        <div class="li"><time>2024 - 2026</time><div><b>Master of Information Technology</b><span>University of Indonesia</span></div></div>
+        <div class="li"><time>2016 - 2020</time><div><b>Bachelor of Computer Science</b><span>University of Brawijaya</span></div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <div class="title">Let’s build <br> something <br> that matters.</div>
+  <p>Big ideas start with a conversation. Let’s talk.</p>
+  <a class="big" href="mailto:reynalddaffa.dev@gmail.com">reynalddaffa.dev@gmail.com</a>
+</div></section>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> Reynald Daffa Pahlevi.</span>
+  <div class="social">
+    <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M8 10.5v6M8 7.6v.01M12.5 16.5v-3.6c0-1.3 1-2.2 2.2-2.2s2.1.9 2.1 2.2v3.6"/></svg></a>
+    <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg></a>
+  </div>
+</div></footer>
+
+<script src="homepage.js"></script>
+</body></html>
