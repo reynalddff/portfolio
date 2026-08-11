@@ -5,17 +5,23 @@ tb.onclick=()=>{const d=root.dataset.theme==='dark';root.dataset.theme=d?'light'
 
 document.getElementById('mq').innerHTML=(()=>{const s='<span>Usability Testing</span><span>·</span><span>Design systems</span><span>·</span><span>Vibe Coding</span><span>·</span><span>Prototyping</span><span>·</span><span>AI Mindset</span><span>·</span>';return s+s+s+s;})();
 
-const P=[
- {n:'Case 01',t:'Solving the 15% Conversion Bottleneck',p:'FLIK Checkout: Buy or Walk Away.',s:'kin1'},
- {n:'Case 02',t:'Generated Rp 6 Billion with Smart Offline Sales',p:'FLIK O2O: Where Offline Meets Online.',s:'kin2'},
- {n:'Case 03',t:'Redesign Pricing, Unlocked 200% More Subscriptions',p:'SIRCLO: Redesign Billing & Plans.',s:'kin3'},
- {n:'Case 04',t:'Exposing Cart Abandonment at UNIQLO ID',p:'UNIQLO: Cart Abandonment.',s:'kin4'}
-];
-document.getElementById('grid').innerHTML=P.map(x=>`
+/* Case studies: fetched from Sanity, no build step here — update once the Studio project exists */
+const SANITY_PROJECT_ID='your-project-id';
+const SANITY_DATASET='production';
+const CASE_STUDY_LIST_QUERY=encodeURIComponent(
+ '*[_type == "caseStudy"] | order(year desc){title,summary,"slug":slug.current,"img":coverImage.asset->url}'
+);
+fetch(`https://${SANITY_PROJECT_ID}.apicdn.sanity.io/v2024-01-01/data/query/${SANITY_DATASET}?query=${CASE_STUDY_LIST_QUERY}`)
+ .then(r=>r.json())
+ .then(({result})=>{
+   document.getElementById('grid').innerHTML=(result||[]).map((x,i)=>`
 <article class="proj reveal">
- <div class="img"><img loading="lazy" alt="" src="https://picsum.photos/seed/${x.s}/900/620"></div>
- <div class="b"><div class="n">${x.n}</div><h3><a href="#work">${x.t}</a></h3><p>${x.p}</p>
+ <div class="img"><img loading="lazy" alt="" src="${x.img||''}"></div>
+ <div class="b"><div class="n">Case ${String(i+1).padStart(2,'0')}</div><h3><a href="case-study/?slug=${x.slug}">${x.title}</a></h3><p>${x.summary||''}</p>
 </article>`).join('');
+   document.querySelectorAll('#grid .reveal').forEach(el=>io.observe(el));
+ })
+ .catch(()=>{document.getElementById('grid').innerHTML='<p>Case studies unavailable right now.</p>';});
 
 const STAR='<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1 1.4-6.3L1 8.5l6.4-.6z"/></svg>';
 const stars=n=>`<div class="stars">${STAR.repeat(n)}</div>`;
