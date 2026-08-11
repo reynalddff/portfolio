@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@portabletext/react": "^7.0.1",
-    "@sanity/client": "^7.26.2",
+    "@contentful/rich-text-react-renderer": "^16.0.0",
+    "contentful": "^11.7.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

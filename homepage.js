@@ -5,20 +5,23 @@ tb.onclick=()=>{const d=root.dataset.theme==='dark';root.dataset.theme=d?'light'
 
 document.getElementById('mq').innerHTML=(()=>{const s='<span>Usability Testing</span><span>·</span><span>Design systems</span><span>·</span><span>Vibe Coding</span><span>·</span><span>Prototyping</span><span>·</span><span>AI Mindset</span><span>·</span>';return s+s+s+s;})();
 
-/* Case studies: fetched from Sanity, no build step here — update once the Studio project exists */
-const SANITY_PROJECT_ID='your-project-id';
-const SANITY_DATASET='production';
-const CASE_STUDY_LIST_QUERY=encodeURIComponent(
- '*[_type == "caseStudy"] | order(year desc){title,summary,"slug":slug.current,"img":coverImage.asset->url}'
-);
-fetch(`https://${SANITY_PROJECT_ID}.apicdn.sanity.io/v2024-01-01/data/query/${SANITY_DATASET}?query=${CASE_STUDY_LIST_QUERY}`)
+/* Case studies: fetched from Contentful, no build step here — update once the space exists */
+const CONTENTFUL_SPACE_ID='ued1jttx7crp';
+const CONTENTFUL_ENVIRONMENT='master';
+const CONTENTFUL_ACCESS_TOKEN='yuRyV9uw3_yJowAGYgXLa9bQznx1YouthIl8IzUah94yuRyV9uw3_yJowAGYgXLa9bQznx1YouthIl8IzUah94yuRyV9uw3_yJowAGYgXLa9bQznx1YouthIl8IzUah94';
+const CASE_STUDY_LIST_URL=`https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/environments/${CONTENTFUL_ENVIRONMENT}/entries?access_token=${CONTENTFUL_ACCESS_TOKEN}&content_type=caseStudy&order=-fields.year&include=1&select=fields.title,fields.summary,fields.slug,fields.coverImage`;
+fetch(CASE_STUDY_LIST_URL)
  .then(r=>r.json())
- .then(({result})=>{
-   document.getElementById('grid').innerHTML=(result||[]).map((x,i)=>`
+ .then(({items,includes})=>{
+   const assets=Object.fromEntries((includes?.Asset||[]).map(a=>[a.sys.id,a.fields?.file?.url]));
+   document.getElementById('grid').innerHTML=(items||[]).map((x,i)=>{
+     const f=x.fields,imgId=f.coverImage?.sys?.id,img=imgId&&assets[imgId]?`https:${assets[imgId]}`:'';
+     return `
 <article class="proj reveal">
- <div class="img"><img loading="lazy" alt="" src="${x.img||''}"></div>
- <div class="b"><div class="n">Case ${String(i+1).padStart(2,'0')}</div><h3><a href="case-study/?slug=${x.slug}">${x.title}</a></h3><p>${x.summary||''}</p>
-</article>`).join('');
+ <div class="img"><img loading="lazy" alt="" src="${img}"></div>
+ <div class="b"><div class="n">Case ${String(i+1).padStart(2,'0')}</div><h3><a href="case-study/?slug=${f.slug}">${f.title}</a></h3><p>${f.summary||''}</p>
+</article>`;
+   }).join('');
    document.querySelectorAll('#grid .reveal').forEach(el=>io.observe(el));
  })
  .catch(()=>{document.getElementById('grid').innerHTML='<p>Case studies unavailable right now.</p>';});

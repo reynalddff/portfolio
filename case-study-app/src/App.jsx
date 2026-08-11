@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { PortableText } from '@portabletext/react'
-import { fetchCaseStudy } from './sanityClient'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { fetchCaseStudy } from './contentfulClient'
 import './App.css'
 
 function useTheme() {
@@ -96,7 +96,7 @@ export default function App() {
         )}
         {cs.body && (
           <div className="cs-body">
-            <PortableText value={cs.body} />
+            {documentToReactComponents(cs.body)}
           </div>
         )}
         {cs.gallery?.length > 0 && (

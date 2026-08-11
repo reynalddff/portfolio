@@ -1,0 +1,23 @@
+{
+  "contentTypes": [
+    {
+      "sys": { "id": "caseStudy" },
+      "name": "Case Study",
+      "description": "",
+      "displayField": "title",
+      "fields": [
+        { "id": "title", "name": "Title", "type": "Symbol", "required": true, "localized": false },
+        { "id": "slug", "name": "Slug", "type": "Symbol", "required": true, "localized": false },
+        { "id": "client", "name": "Client", "type": "Symbol", "required": false, "localized": false },
+        { "id": "role", "name": "Role", "type": "Symbol", "required": false, "localized": false },
+        { "id": "year", "name": "Year", "type": "Symbol", "required": false, "localized": false },
+        { "id": "tags", "name": "Tags", "type": "Array", "items": { "type": "Symbol" }, "required": false, "localized": false },
+        { "id": "summary", "name": "Summary", "type": "Text", "required": false, "localized": false },
+        { "id": "coverImage", "name": "Cover Image", "type": "Link", "linkType": "Asset", "required": false, "localized": false },
+        { "id": "metrics", "name": "Metrics", "type": "Array", "items": { "type": "Object" }, "required": false, "localized": false },
+        { "id": "body", "name": "Body", "type": "RichText", "required": false, "localized": false },
+        { "id": "gallery", "name": "Gallery", "type": "Array", "items": { "type": "Link", "linkType": "Asset" }, "required": false, "localized": false }
+      ]
+    }
+  ]
+}

@@ -163,13 +163,13 @@ finish() {
 # STAGES
 # ──────────────────────────────────────────────────────────────────────────
 
-TOTAL_STAGES=9
+TOTAL_STAGES=8
 
 PORTFOLIO_DIR="/Users/reynalddaffa/Vibe Coding/My First Porto"
 cd "$PORTFOLIO_DIR" || { echo "Can't find $PORTFOLIO_DIR"; exit 1; }
 ENV_FILE="$PORTFOLIO_DIR/case-study-app/.env"
 
-banner "Sanity-backed case studies — go live"
+banner "Contentful-backed case studies — go live"
 
 # ── Stage 1: GitHub repo ───────────────────────────────────────────────────
 stage "GitHub repo — create + push"
@@ -205,99 +205,92 @@ step "Under 'Build and deployment' → Source, choose 'Deploy from a branch'."
 step "Branch: $BRANCH_NAME, folder: / (root). Save."
 pause "Press Enter once saved (first deploy takes ~1 min)..."
 
-# ── Stage 3: Sanity Studio scaffold ────────────────────────────────────────
-stage "Sanity Studio — scaffold project"
-say "This creates your actual Sanity project (opens a browser login the first"
-say "time), and generates the Studio app into ./studio. It asks its own"
-say "questions — answer them like this:"
-step "output path → studio"
-step "project name → portfolio (or anything you like)"
-step "use the default dataset configuration → yes, dataset name: production"
-step "TypeScript → No"
-step "template → Clean project with no predefined schema"
-step "package manager → npm"
-pause "Press Enter to launch it..."
-npm create sanity@latest
-say "Scaffold done. Now grab your project ID."
-SANITY_PROJECT_ID=""
-FOUND_ID=$(grep -hoE "projectId:\s*'[a-z0-9]+'" studio/sanity.config.* studio/sanity.cli.* 2>/dev/null | grep -oE "'[a-z0-9]+'" | tr -d "'" | head -n1 || true)
-if [[ -n "$FOUND_ID" ]]; then
-  note "found projectId in studio/sanity.config: $FOUND_ID"
-fi
-ask SANITY_PROJECT_ID "Sanity project ID${FOUND_ID:+ [Enter to use $FOUND_ID]}:"
-[[ -z "$SANITY_PROJECT_ID" && -n "$FOUND_ID" ]] && SANITY_PROJECT_ID="$FOUND_ID"
+# ── Stage 3: Contentful space ──────────────────────────────────────────────
+stage "Contentful — create space"
+say "This creates the space that holds your case-study content."
+open_url "https://app.contentful.com/"
+step "Log in (or sign up — free tier is enough for this)."
+step "Create a new space — any name, e.g. 'portfolio'. Pick the free 'Community' plan."
+step "Once inside the space: Settings → General settings, and copy the Space ID shown there."
+pause "Press Enter once the space exists..."
+CONTENTFUL_SPACE_ID=""
+ask CONTENTFUL_SPACE_ID "Contentful Space ID:"
 
-# ── Stage 4: wire up the schema ────────────────────────────────────────────
-stage "Schema — register caseStudy"
-say "studio-schema/caseStudy.js has your case-study fields ready to go —"
-say "it just needs to move into the Studio and get registered."
-if [[ -d studio/schemaTypes ]]; then
-  cp studio-schema/caseStudy.js studio/schemaTypes/caseStudy.js
-  note "copied → studio/schemaTypes/caseStudy.js"
+# ── Stage 4: content type — import caseStudy ───────────────────────────────
+stage "Content type — import caseStudy"
+say "contentful-schema/caseStudy.json has your case-study fields ready to go —"
+say "the Contentful CLI imports it as a content type in one shot."
+if ! command -v contentful >/dev/null 2>&1; then
+  if confirm "contentful-cli not found — install it now (npm install -g contentful-cli)?"; then
+    npm install -g contentful-cli
+  else
+    SKIPPED+=("install contentful-cli, then run: contentful space import --content-file contentful-schema/caseStudy.json --space-id $CONTENTFUL_SPACE_ID --environment-id master")
+  fi
+fi
+if command -v contentful >/dev/null 2>&1; then
+  say "This opens a browser login the first time (contentful login)."
+  contentful login || true
+  if confirm "Import contentful-schema/caseStudy.json into space $CONTENTFUL_SPACE_ID now?"; then
+    contentful space import --content-file contentful-schema/caseStudy.json --space-id "$CONTENTFUL_SPACE_ID" --environment-id master
+  else
+    SKIPPED+=("run: contentful space import --content-file contentful-schema/caseStudy.json --space-id $CONTENTFUL_SPACE_ID --environment-id master")
+  fi
 else
-  warn "studio/schemaTypes not found — copy studio-schema/caseStudy.js there manually."
-fi
-say "Open studio/schemaTypes/index.js and make sure it imports and exports caseStudy, e.g.:"
-note "  import caseStudy from './caseStudy'"
-note "  export const schemaTypes = [caseStudy]"
-pause "Press Enter once schemaTypes/index.js includes caseStudy..."
-if confirm "Delete the now-empty studio-schema/ folder?"; then
-  rm -rf studio-schema
+  warn "skipping import — do it later with the command above."
 fi
 
-# ── Stage 5: deploy hosted Studio ──────────────────────────────────────────
-stage "Studio — deploy hosted editor"
-say "Publishes the content editor at <name>.sanity.studio — this is where"
-say "you'll actually write case studies day to day."
-pause "Press Enter to run 'sanity deploy' (answer its hostname prompt yourself)..."
-(cd studio && npx sanity deploy)
+# ── Stage 5: API key — Content Delivery API ────────────────────────────────
+stage "API key — Content Delivery API"
+say "This is the read-only token the site uses to fetch published content."
+say "Safe to embed client-side — it's Contentful's intended public-read token."
+open_url "https://app.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/api/keys"
+step "Add API key (or use the auto-generated 'Example Key')."
+step "Copy 'Content Delivery API - access token' from the key's detail page."
+pause "Press Enter once you have the token..."
+CONTENTFUL_ACCESS_TOKEN=""
+ask_secret CONTENTFUL_ACCESS_TOKEN "Content Delivery API access token:"
 
-# ── Stage 6: CORS ──────────────────────────────────────────────────────────
-stage "CORS — allow your site to read Sanity"
-say "Without this, fetch() calls from your site get blocked by the browser."
-open_url "https://www.sanity.io/manage/project/${SANITY_PROJECT_ID}/api"
-say "Add each origin below (Add CORS origin), 'Allow credentials' = No for all:"
-step "http://localhost:8000   (homepage dev, python3 -m http.server)"
-step "http://localhost:5173   (case-study-app dev, npm run dev)"
-step "https://reynalddff.github.io"
-pause "Press Enter once all three are added..."
-
-# ── Stage 7: wire the project ID into the code ─────────────────────────────
-stage "Project ID — wire into the app + homepage"
-write_env "VITE_SANITY_PROJECT_ID" "$SANITY_PROJECT_ID"
-write_env "VITE_SANITY_DATASET" "production"
-say "homepage.js has no build step, so its Sanity config is a plain string —"
-say "safe to edit directly (projectId/dataset aren't secrets)."
-if grep -q "your-project-id" homepage.js; then
-  sed -i.bak "s/your-project-id/${SANITY_PROJECT_ID}/" homepage.js && rm -f homepage.js.bak
-  note "✓ updated SANITY_PROJECT_ID in homepage.js"
+# ── Stage 6: wire tokens into the app + homepage ───────────────────────────
+stage "Tokens — wire into the app + homepage"
+write_env "VITE_CONTENTFUL_SPACE_ID" "$CONTENTFUL_SPACE_ID"
+write_env "VITE_CONTENTFUL_ENVIRONMENT" "master"
+write_env "VITE_CONTENTFUL_ACCESS_TOKEN" "$CONTENTFUL_ACCESS_TOKEN"
+say "homepage.js has no build step, so its Contentful config is plain strings —"
+say "the space ID is not secret, but the access token is embedded the same way"
+say "Contentful expects for client-side delivery reads."
+if grep -q "your-space-id" homepage.js; then
+  sed -i.bak \
+    -e "s/your-space-id/${CONTENTFUL_SPACE_ID}/" \
+    -e "s/your-delivery-api-token/${CONTENTFUL_ACCESS_TOKEN}/" \
+    homepage.js && rm -f homepage.js.bak
+  note "✓ updated Contentful config in homepage.js"
 else
-  note "homepage.js already updated, or placeholder not found — check it manually."
+  note "homepage.js already updated, or placeholders not found — check it manually."
 fi
 
-# ── Stage 8: build + deploy the case-study app ─────────────────────────────
+# ── Stage 7: build + deploy the case-study app ─────────────────────────────
 stage "Build case-study-app → commit static output"
 say "One-time manual build (no CI, per your call earlier) — repeat this stage"
-say "whenever you change case-study-app's code, NOT when you edit content in Studio."
+say "whenever you change case-study-app's code, NOT when you edit content in Contentful."
 (cd case-study-app && npm install --silent && npm run build)
 rm -rf case-study
 cp -r case-study-app/dist case-study
 note "✓ built into ./case-study"
 git add -A
 if confirm "Commit and push everything now?"; then
-  git commit -m "Wire up Sanity project + deploy case-study app" || note "nothing to commit"
+  git commit -m "Wire up Contentful space + deploy case-study app" || note "nothing to commit"
   git push
 else
   note "skipped — review with 'git status' then commit/push yourself."
 fi
 
-# ── Stage 9: verify ─────────────────────────────────────────────────────────
+# ── Stage 8: verify ─────────────────────────────────────────────────────────
 stage "Verify — see it live"
-say "Homepage's case-study grid will look empty until at least one caseStudy"
-say "document exists — add one now in Studio if you haven't."
+say "Homepage's case-study grid will look empty until at least one Case Study"
+say "entry exists AND is published — add one now if you haven't."
 open_url "https://reynalddff.github.io/portfolio/"
-open_url "https://www.sanity.io/manage/project/${SANITY_PROJECT_ID}/api"
-say "Once you've published a document, test its detail page:"
+open_url "https://app.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries"
+say "Once you've published an entry, test its detail page:"
 note "  https://reynalddff.github.io/portfolio/case-study/?slug=<its-slug>"
 pause "Press Enter when you've confirmed both pages load..."
 

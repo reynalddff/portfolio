@@ -1,9 +1,9 @@
 # Portfolio
 
-Static site (`homepage.html/css/js`, `testimony.*`) + a Sanity-backed case-study system:
+Static site (`homepage.html/css/js`, `testimony.*`) + a Contentful-backed case-study system:
 
-- `case-study-app/` — React+Vite detail page (`?slug=`), fetches from Sanity, builds to `/case-study`.
-- `studio-schema/caseStudy.js` — Sanity schema, drop into `studio/schemaTypes` once Studio exists.
-- `scripts/setup-sanity.sh` — one-time wizard: creates the GitHub repo, enables Pages, scaffolds the Sanity Studio, wires CORS + project ID, builds and deploys `case-study-app`. Run it with `bash scripts/setup-sanity.sh`.
+- `case-study-app/` — React+Vite detail page (`?slug=`), fetches from Contentful, builds to `/case-study`.
+- `contentful-schema/caseStudy.json` — Contentful content-type definition, imported via `contentful space import`.
+- `scripts/setup-contentful.sh` — one-time wizard: creates the GitHub repo, enables Pages, creates the Contentful space, imports the content type, wires the API token, builds and deploys `case-study-app`. Run it with `bash scripts/setup-contentful.sh`.
 
-After initial setup, day-to-day content edits happen in the hosted Sanity Studio — no rebuild needed. Only re-run `npm run build` in `case-study-app` (and copy `dist/` into `/case-study`) when you change that app's own code.
+After initial setup, day-to-day content edits happen in the Contentful web app — no rebuild needed. Only re-run `npm run build` in `case-study-app` (and copy `dist/` into `/case-study`) when you change that app's own code.
