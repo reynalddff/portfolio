@@ -1,0 +1,3 @@
+[build]
+  command = "cd case-study-app && npm install && npm run build && cd .. && rm -rf case-study && cp -r case-study-app/dist case-study && rm -rf case-study-app/node_modules"
+  publish = "."
