@@ -39,7 +39,9 @@
   font-size: 14px;
   font-weight: 700;
   padding: 12px 12px;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 .toc-panel nav a:hover {
   background: var(--pop3);
@@ -65,7 +67,7 @@
 
 .content {
   padding: 64px 56px;
-  max-width: 760px;
+  max-width: 800px;
 }
 .content .vlabel {
   margin-bottom: 20px;
@@ -81,9 +83,17 @@
 .content .summary {
   font-size: 16.5px;
   line-height: 1.7;
-  color: var(--dim);
+  color: #0a0a0a;
   max-width: 60ch;
   text-wrap: pretty;
+  border: 3px solid var(--edge);
+  box-shadow: 6px 6px 0 var(--edge);
+  background: color-mix(in srgb, var(--pop3) 12%, var(--card));
+  padding: 18px 22px;
+  margin: 20px 0 28px;
+}
+[data-theme="dark"] .content .summary {
+  color: #f0f0f0;
 }
 .content h2 {
   font-family: Anton, sans-serif;
@@ -106,15 +116,18 @@
 .content p {
   font-size: 16px;
   line-height: 1.8;
-  color: var(--dim);
+  color: #0a0a0a;
   margin-bottom: 14px;
   text-wrap: pretty;
+}
+[data-theme="dark"] .content p {
+  color: #f0f0f0;
 }
 .content ul {
   margin: 12px 0 14px 20px;
 }
 .content li {
-  font-size: 15.5px;
+  font-size: 16px;
   color: var(--dim);
   line-height: 1.75;
 }
@@ -122,7 +135,8 @@
   border: 3px solid var(--edge);
   box-shadow: 8px 8px 0 var(--edge);
   overflow: hidden;
-  margin: 28px 0;
+  width: 75%;
+  margin: 28px auto;
   /* Neutral gray plate behind transparent-background screenshots, not the sitewide pop2 image-placeholder blue. */
   background: color-mix(in srgb, var(--edge) 15%, var(--card));
 }
@@ -172,7 +186,9 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(12px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 .back-to-top.visible {
   opacity: 1;
@@ -309,17 +325,6 @@
   }
 }
 
-.cs-meta {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  color: var(--dim);
-  font-size: 13.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-top: 18px;
-}
 .cs-cover {
   margin-top: 40px;
   border: 3px solid var(--edge);
@@ -446,8 +451,12 @@
   stroke-linecap: round;
 }
 @keyframes lightbox-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .lightbox-overlay {

@@ -46,9 +46,9 @@ function Nav({ dark, setDark }) {
   return (
     <nav className={navOpen ? 'nav-open' : ''} aria-label="Site">
       <div className="wrap">
-        <a className="mark" href="../#top">REYNALD<span>.</span></a>
+        <a className="mark" href="../#home">REYNALD<span>.</span></a>
         <div className="links" id="navLinks">
-          <a href="../#top" onClick={() => setNavOpen(false)}>Home</a>
+          <a href="../#home" onClick={() => setNavOpen(false)}>Home</a>
           <a href="../#work" onClick={() => setNavOpen(false)}>Case Study</a>
           <a href="../#profile" onClick={() => setNavOpen(false)}>Profile</a>
           <a href="https://docs.google.com/document/d/1_1jKttusff1OLHlpOVcJbrYGVFzZL4DWwS2hLrMPuPU/edit?tab=t.0" target="_blank" rel="noopener noreferrer" onClick={() => setNavOpen(false)}>Resume</a>
@@ -87,7 +87,7 @@ function Toc({ title, items, activeId, tocOpen, setTocOpen }) {
       <aside className={`toc-panel ${tocOpen ? 'open' : ''}`} id="tocPanel">
         <div className="eyebrow">Table of contents</div>
         <nav aria-label="Table of contents">
-          <a className="lvl-h1" href="#top" onClick={() => setTocOpen(false)}>{title}</a>
+          <a className="lvl-h1" href="#home" onClick={() => setTocOpen(false)}>{title}</a>
           {items.map(item => (
             <a key={item.id} className={`lvl-h${item.level} ${activeId === item.id ? 'active' : ''}`.trim()} href={`#${item.id}`} onClick={() => setTocOpen(false)}>
               {item.text}
@@ -132,6 +132,10 @@ export default function App() {
 
   const cs = state.status === 'ready' ? state.data : null
   const { slugs: headingSlugs, items: tocItems } = useMemo(() => buildToc(cs?.body), [cs])
+
+  useEffect(() => {
+    if (cs) document.title = `Case Study - ${cs.title}`
+  }, [cs])
 
   const richTextOptions = useMemo(() => ({
     renderNode: {
@@ -206,11 +210,6 @@ export default function App() {
           <div className="vlabel">{cs.client}</div>
           <h1>{cs.title}</h1>
           {cs.summary && <p className="summary">{cs.summary}</p>}
-          <div className="cs-meta">
-            {cs.role && <span>{cs.role}</span>}
-            {cs.year && <span>{cs.year}</span>}
-            {cs.tags?.map(t => <span key={t}>{t}</span>)}
-          </div>
           {cs.coverImage && (
             <div className="cs-cover"><img src={cs.coverImage} alt={cs.title} onClick={() => setLightboxImage({ src: cs.coverImage, alt: cs.title })} /></div>
           )}
