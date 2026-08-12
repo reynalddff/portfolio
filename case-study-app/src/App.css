@@ -1,6 +1,314 @@
-.cs-wrap {
-  padding: 140px 0 60px;
+.layout {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  gap: 0;
+  padding-top: 60px;
+  min-height: 100vh;
 }
+.toc-panel {
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  background: var(--card);
+  border-right: 3px solid var(--edge);
+  padding: 40px 28px;
+  overflow-y: auto;
+}
+.toc-panel .eyebrow {
+  font-family: Anton, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--pop);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.toc-panel nav {
+  /* homepage.css's bare `nav` selector targets the site nav as position:fixed; reset that here so the TOC's own <nav> stays a normal flow child of the sidebar. */
+  position: static;
+  top: auto;
+  z-index: auto;
+  background: none;
+  border-bottom: none;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.toc-panel nav a {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 12px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.toc-panel nav a:hover {
+  background: var(--pop3);
+  color: #111;
+}
+.toc-panel nav a.active,
+.toc-panel nav a.active:hover {
+  background: var(--pop);
+  color: var(--bg);
+}
+.toc-panel nav a.lvl-h1 {
+  font-family: Anton, sans-serif;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+}
+.toc-panel nav a.lvl-h3 {
+  padding-left: 18px;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.content {
+  padding: 64px 56px;
+  max-width: 760px;
+}
+.content .vlabel {
+  margin-bottom: 20px;
+}
+.content h1 {
+  font-family: Anton, sans-serif;
+  font-size: clamp(30px, 4vw, 48px);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+.content .summary {
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--dim);
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.content h2 {
+  font-family: Anton, sans-serif;
+  font-size: clamp(22px, 2.8vw, 32px);
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 56px 0 16px;
+  scroll-margin-top: 80px;
+  text-wrap: balance;
+}
+.content h3 {
+  font-family: Anton, sans-serif;
+  font-size: clamp(16px, 1.8vw, 20px);
+  text-transform: uppercase;
+  margin: 32px 0 12px;
+  color: var(--ink);
+  scroll-margin-top: 80px;
+  text-wrap: balance;
+}
+.content p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--dim);
+  margin-bottom: 14px;
+  text-wrap: pretty;
+}
+.content ul {
+  margin: 12px 0 14px 20px;
+}
+.content li {
+  font-size: 15.5px;
+  color: var(--dim);
+  line-height: 1.75;
+}
+.content .frame {
+  border: 3px solid var(--edge);
+  box-shadow: 8px 8px 0 var(--edge);
+  overflow: hidden;
+  margin: 28px 0;
+  /* Neutral gray plate behind transparent-background screenshots, not the sitewide pop2 image-placeholder blue. */
+  background: color-mix(in srgb, var(--edge) 15%, var(--card));
+}
+.content .frame img {
+  cursor: zoom-in;
+  width: 100%;
+  display: block;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 22px;
+  z-index: 90;
+  background: var(--pop3);
+  color: #111;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 16px;
+  border: 3px solid var(--edge);
+  box-shadow: 4px 4px 0 var(--edge);
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+.back-to-top,
+.toc-toggle {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 70;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: var(--pop3);
+  color: var(--edge);
+  border: 3px solid var(--edge);
+  box-shadow: 4px 4px 0 var(--edge);
+  cursor: pointer;
+}
+.back-to-top {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.back-to-top:active,
+.toc-toggle:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--edge);
+}
+.back-to-top svg,
+.toc-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.toc-toggle {
+  display: none;
+  color: #111;
+}
+
+.toc-overlay {
+  display: none;
+  position: fixed;
+  inset: 60px 0 0 0;
+  z-index: 75;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.toc-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hamburger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--edge);
+  background: var(--card);
+  box-shadow: 4px 4px 0 var(--edge);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+.hamburger:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--edge);
+}
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--edge);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .back-to-top {
+    display: none;
+  }
+  .toc-toggle {
+    display: grid;
+  }
+  .toc-overlay {
+    display: block;
+  }
+  .toc-panel {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: calc(100vh - 60px);
+    width: 40vw;
+    min-width: 220px;
+    z-index: 80;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 6px 0 0 var(--edge);
+  }
+  .toc-panel.open {
+    transform: translateX(0);
+  }
+  .content {
+    padding: 48px 22px;
+  }
+}
+@media (max-width: 480px) {
+  .toc-panel {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 880px) {
+  .hamburger {
+    display: flex;
+  }
+  nav .links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--bg);
+    border-bottom: 3px solid var(--edge);
+    padding: 8px 22px 16px;
+  }
+  nav.nav-open .links {
+    display: flex;
+  }
+  nav .links a {
+    padding: 14px 4px;
+    border-top: 2px solid var(--edge);
+  }
+  nav .links a:first-child {
+    border-top: none;
+  }
+}
+
 .cs-meta {
   display: flex;
   gap: 14px;
@@ -23,6 +331,7 @@
   display: block;
   object-fit: cover;
   max-height: 520px;
+  cursor: zoom-in;
 }
 .cs-metrics {
   display: flex;
@@ -84,11 +393,66 @@
   border: 3px solid var(--edge);
   box-shadow: 6px 6px 0 var(--edge);
   display: block;
+  cursor: zoom-in;
 }
 .cs-state {
   padding: 160px 0;
   text-align: center;
   color: var(--dim);
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: rgba(0, 0, 0, 0.85);
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  cursor: zoom-out;
+  animation: lightbox-in 0.2s ease;
+}
+.lightbox-overlay img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  cursor: default;
+}
+.lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 96;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--pop3);
+  color: #111;
+  border: 3px solid var(--edge);
+  box-shadow: 4px 4px 0 var(--edge);
+  cursor: pointer;
+}
+.lightbox-close:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--edge);
+}
+.lightbox-close svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-overlay {
+    animation: none;
+  }
 }
 @media (max-width: 880px) {
   .cs-gallery {
