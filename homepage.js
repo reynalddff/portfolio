@@ -18,7 +18,7 @@ fetch(CASE_STUDY_LIST_URL)
      const f=x.fields,imgId=f.coverImage?.sys?.id,img=imgId&&assets[imgId]?`https:${assets[imgId]}`:'';
      return `
 <article class="proj reveal">
- <div class="img"><img loading="lazy" alt="" src="${img}"></div>
+ <div class="img"><a href="case-study/?slug=${f.slug}"><img loading="lazy" alt="" src="${img}"></a></div>
  <div class="b"><div class="n">Case ${String(i+1).padStart(2,'0')}</div><h3><a href="case-study/?slug=${f.slug}">${f.title}</a></h3><p>${f.summary||''}</p>
 </article>`;
    }).join('');
@@ -29,25 +29,18 @@ fetch(CASE_STUDY_LIST_URL)
 const STAR='<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1 1.4-6.3L1 8.5l6.4-.6z"/></svg>';
 const stars=n=>`<div class="stars">${STAR.repeat(n)}</div>`;
 const T=[
- {n:'Sarah Kinanti',r:'Head of Product, SIRCLO',s:'kin1',rate:5,
-  q:'Reynald turned our messy billing flow into something the team could actually ship. Subscriptions jumped 200% within the quarter.'},
- {n:'Bagas Herlambang',r:'CEO, FLIK',s:'kin2',rate:5,
-  q:'He does not just design screens, he designs for the metric. The O2O flow he built moved Rp6B in GMV.'},
- {n:'Dinda Prameswari',r:'Engineering Lead, FLIK',s:'kin3',rate:5,
-  q:'Handoff with Reynald is painless. His files survive contact with engineering, which is rarer than it should be.'},
- {n:'Farrel Nugroho',r:'PM, UNIQLO Digital',s:'kin4',rate:4,
-  q:'Cut our cart abandonment meaningfully in one sprint cycle. Sharp on both research and execution.'},
-//  {n:'Michelle Adisty',r:'Design Director, Rakamin',s:'kin5',rate:5,
-//   q:'As a mentor he pushed our juniors to defend decisions with data, not opinion. That habit stuck.'},
-//  {n:'Yusuf Pratama',r:'CTO, SKILVUL',s:'kin6',rate:5,
-//   q:'Rare mix: strong enterprise UX instincts plus enough engineering fluency to argue scope honestly.'},
+ {n:'Kandika Bagaskara',r:'Senior Product Manager',rate:5,
+  q:'I had the pleasure of working with Daffa at FLIK, where he was part of my team as a Product Designer. He consistently delivered high-quality work at speed, with great attention to detail. His openness to grow into an Associate Product Manager role showed real adaptability and drive.'},
+ {n:'Reza Dwi Cahyo',r:'Product Manager',rate:5,
+  q:'I worked with Daffa on the Merchant Dashboard project at FLIK, where he was Product Designer. He brought strong attention to detail and solid design thinking, and was always easy to collaborate with.'},
+ {n:'Raam Pujangga Sadewa',r:'Product Designer',rate:5,
+  q:'I worked with Daffa as a peer Product Designer at FLIK, collaborating closely on research and building our design system. He was thoughtful, detail-oriented, and great to build with.'},
 ];
-const av=s=>`https://picsum.photos/seed/${s}/120/120`;
 document.getElementById('t1').innerHTML=T.slice(0,6).map(t=>`
 <div class="card">
   ${stars(t.rate)}
   <p>&ldquo;${t.q}&rdquo;</p>
-  <div class="who"><img loading="lazy" alt="" src="${av(t.s)}"><div><b>${t.n}</b><span>${t.r}</span></div></div>
+  <div class="who"><div><b>${t.n}</b><span>${t.r}</span></div></div>
 </div>`).join('');
 
 const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.12});

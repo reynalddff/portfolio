@@ -271,6 +271,11 @@ section {
   overflow: hidden;
   background: var(--pop2);
 }
+.proj .img a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .proj img {
   width: 100%;
   height: 100%;
@@ -524,18 +529,7 @@ footer .wrap {
   fill: currentColor;
 }
 .who {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   margin-top: 16px;
-}
-.who img {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--edge);
-  display: block;
 }
 .who b {
   display: block;
