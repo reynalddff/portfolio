@@ -26,6 +26,24 @@ fetch(CASE_STUDY_LIST_URL)
  })
  .catch(()=>{document.getElementById('grid').innerHTML='<p>Case studies unavailable right now.</p>';});
 
+/* Side projects: same Contentful space, separate content type */
+const SIDE_PROJECT_LIST_URL=`https://cdn.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/environments/${CONTENTFUL_ENVIRONMENT}/entries?access_token=${CONTENTFUL_ACCESS_TOKEN}&content_type=sideProject&include=1&select=fields.title,fields.summary,fields.slug,fields.coverImage`;
+fetch(SIDE_PROJECT_LIST_URL)
+ .then(r=>r.json())
+ .then(({items,includes})=>{
+   const assets=Object.fromEntries((includes?.Asset||[]).map(a=>[a.sys.id,a.fields?.file?.url]));
+   document.getElementById('sideGrid').innerHTML=(items||[]).map((x,i)=>{
+     const f=x.fields,imgId=f.coverImage?.sys?.id,img=imgId&&assets[imgId]?`https:${assets[imgId]}`:'';
+     return `
+<article class="proj reveal">
+ <div class="img"><a href="side-project/?slug=${f.slug}"><img loading="lazy" alt="" src="${img}"></a></div>
+ <div class="b"><div class="n">Project ${String(i+1).padStart(2,'0')}</div><h3><a href="side-project/?slug=${f.slug}">${f.title}</a></h3><p>${f.summary||''}</p>
+</article>`;
+   }).join('');
+   document.querySelectorAll('#sideGrid .reveal').forEach(el=>io.observe(el));
+ })
+ .catch(()=>{document.getElementById('sideGrid').innerHTML='<p>Side projects unavailable right now.</p>';});
+
 const STAR='<svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.1 1.4-6.3L1 8.5l6.4-.6z"/></svg>';
 const stars=n=>`<div class="stars">${STAR.repeat(n)}</div>`;
 const T=[

@@ -11,9 +11,9 @@ function assetUrl(asset) {
   return url ? `https:${url}` : undefined
 }
 
-export async function fetchCaseStudy(slug) {
+export async function fetchEntry(contentType, slug) {
   const { items } = await contentful.getEntries({
-    content_type: 'caseStudy',
+    content_type: contentType,
     'fields.slug': slug,
     limit: 1,
     include: 10,
@@ -22,6 +22,17 @@ export async function fetchCaseStudy(slug) {
   if (!entry) return null
 
   const f = entry.fields
+  if (contentType === 'sideProject') {
+    return {
+      title: f.title,
+      slug: f.slug,
+      tags: f.tags,
+      summary: f.summary,
+      coverImage: assetUrl(f.coverImage),
+      body: f.body,
+      link: f.link,
+    }
+  }
   return {
     title: f.title,
     slug: f.slug,

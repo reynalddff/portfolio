@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
-import { fetchCaseStudy } from './contentfulClient'
+import { fetchEntry } from './contentfulClient'
 import './App.css'
 
 function textOf(node) {
@@ -51,7 +51,7 @@ function Nav({ dark, setDark }) {
           <a href="../#home" onClick={() => setNavOpen(false)}>Home</a>
           <a href="../#work" onClick={() => setNavOpen(false)}>Case Study</a>
           <a href="../#profile" onClick={() => setNavOpen(false)}>Profile</a>
-          <a href="https://docs.google.com/document/d/1_1jKttusff1OLHlpOVcJbrYGVFzZL4DWwS2hLrMPuPU/edit?tab=t.0" target="_blank" rel="noopener noreferrer" onClick={() => setNavOpen(false)}>Resume</a>
+          <a href="https://drive.google.com/file/d/1MIBLR-9YFL-308-YHAT5PF2SWsGX9Zvk/view?usp=sharing" target="_blank" rel="noopener noreferrer" onClick={() => setNavOpen(false)}>Resume</a>
         </div>
         <div className="nav-actions">
           <button
@@ -119,23 +119,29 @@ export default function App() {
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [lightboxImage, setLightboxImage] = useState(null)
 
+  const isSideProject = window.location.pathname.includes('/side-project')
+  const contentType = isSideProject ? 'sideProject' : 'caseStudy'
+  const backHref = isSideProject ? '../#side-projects' : '../#work'
+  const backLabel = isSideProject ? 'Back to side projects' : 'Back to case studies'
+  const kindLabel = isSideProject ? 'Side Project' : 'Case Study'
+
   useEffect(() => {
     const slug = new URLSearchParams(window.location.search).get('slug')
     if (!slug) {
       setState({ status: 'missing', data: null })
       return
     }
-    fetchCaseStudy(slug)
+    fetchEntry(contentType, slug)
       .then(data => setState(data ? { status: 'ready', data } : { status: 'notfound', data: null }))
       .catch(() => setState({ status: 'error', data: null }))
-  }, [])
+  }, [contentType])
 
   const cs = state.status === 'ready' ? state.data : null
   const { slugs: headingSlugs, items: tocItems } = useMemo(() => buildToc(cs?.body), [cs])
 
   useEffect(() => {
-    if (cs) document.title = `Case Study - ${cs.title}`
-  }, [cs])
+    if (cs) document.title = `${kindLabel} - ${cs.title}`
+  }, [cs, kindLabel])
 
   const richTextOptions = useMemo(() => ({
     renderNode: {
@@ -192,8 +198,8 @@ export default function App() {
       <>
         <Nav dark={dark} setDark={setDark} />
         <div className="wrap cs-state">
-          <p>{state.status === 'missing' ? 'No case study specified.' : "Couldn't load this case study."}</p>
-          <p><a href="../#work">&larr; Back to case studies</a></p>
+          <p>{state.status === 'missing' ? `No ${kindLabel.toLowerCase()} specified.` : `Couldn't load this ${kindLabel.toLowerCase()}.`}</p>
+          <p><a href={backHref}>&larr; {backLabel}</a></p>
         </div>
       </>
     )
@@ -207,11 +213,14 @@ export default function App() {
         <Toc title={cs.title} items={tocItems} activeId={activeId} tocOpen={tocOpen} setTocOpen={setTocOpen} />
         <main className="content" id="main-content" tabIndex={-1}>
           <div id="top"></div>
-          <div className="vlabel">{cs.client}</div>
+          <div className="vlabel">{cs.client || kindLabel}</div>
           <h1>{cs.title}</h1>
           {cs.summary && <p className="summary">{cs.summary}</p>}
           {cs.coverImage && (
             <div className="cs-cover"><img src={cs.coverImage} alt={cs.title} onClick={() => setLightboxImage({ src: cs.coverImage, alt: cs.title })} /></div>
+          )}
+          {cs.link && (
+            <a className="cs-link" href={cs.link} target="_blank" rel="noopener noreferrer">View Detail Project &rarr;</a>
           )}
           {cs.metrics?.length > 0 && (
             <div className="cs-metrics">
