@@ -1,1 +1,84 @@
-/* design system lives in ../homepage.css — this file is intentionally empty of tokens */
+/* swiss-editorial design tokens — values taken verbatim from redesign-reference/Homepage.dc.html */
+:root {
+  --bg: oklch(0.968 0.006 85);
+  --bg-alt: #F6F4F0;
+  --bg-card: oklch(0.958 0.006 84);
+  --bg-hover: oklch(0.951 0.008 82);
+  --line: #EFEBE8;
+
+  --ink: oklch(0.29 0.012 70);
+  --ink-body: oklch(0.34 0.012 70);
+  --ink-dim: oklch(0.50 0.010 70);
+  --ink-soft: oklch(0.53 0.010 70);
+  --ink-faint: oklch(0.66 0.008 70);
+  --ink-ghost: oklch(0.72 0.008 70);
+
+  --accent: oklch(0.62 0.10 48);
+  --accent-hover: oklch(0.50 0.10 48);
+  --accent-dark: oklch(0.74 0.10 48);
+
+  /* card interior states */
+  --icon-ink: oklch(0.55 0.06 50);
+  --icon-hover-border: oklch(0.72 0.06 52);
+  --icon-hover-bg: oklch(0.975 0.010 80);
+  --visual-hover-border: oklch(0.84 0.014 76);
+  --visual-hover-bg: oklch(0.972 0.005 85);
+
+  /* outline button, inverts to a dark fill on hover */
+  --btn-border: oklch(0.74 0.014 74);
+  --btn-fill: oklch(0.32 0.014 70);
+  --btn-fill-ink: oklch(0.97 0.006 85);
+
+  --nav-bg: rgba(246, 244, 240, 0.82);
+  --nav-bg-dark: rgba(48, 43, 37, 0.82);
+  --nav-btn-border-dark: oklch(0.55 0.03 60);
+
+  --dark-bg: #302B25;
+  --dark-bg-hover: #37312A;
+  --dark-line: #453E37;
+  --dark-card: #3B342D;
+  --dark-ink: oklch(0.96 0.006 85);
+  --dark-ink-nav: oklch(0.94 0.006 85);
+  --dark-ink-dim: oklch(0.80 0.010 78);
+  --dark-ink-faint: oklch(0.68 0.010 76);
+
+  --font-body: 'IBM Plex Mono', monospace;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-display: 'Instrument Serif', Georgia, serif;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-hover);
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -12,3 +12,6 @@ dist-tmp/
 .netlify
 
 .DS_Store
+
+# Design reference scrapes, not source
+redesign-reference/

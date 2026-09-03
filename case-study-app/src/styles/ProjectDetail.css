@@ -1,0 +1,325 @@
+.pd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--line);
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+}
+.pd-header a {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-dim);
+  transition: color 0.3s ease;
+}
+.pd-header a:hover {
+  color: var(--accent);
+}
+.pd-mark {
+  font-family: var(--font-display) !important;
+  font-size: 19px !important;
+  color: var(--ink) !important;
+}
+
+.pd-layout {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  gap: 24px;
+}
+
+.pd-content {
+  padding: 44px 0 80px;
+}
+.pd-cover {
+  height: 320px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 26px;
+}
+.pd-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+.pd-cover:hover img {
+  transform: scale(1.03);
+}
+.pd-cover-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+}
+.pd-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 16px;
+  text-wrap: pretty;
+}
+.pd-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 22px;
+}
+.pd-summary {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--ink-dim);
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.pd-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 12px 20px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  margin: 28px 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.pd-link:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+.pd-metrics {
+  display: flex;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+.pd-metric {
+  background: var(--bg);
+  padding: 18px 24px;
+  min-width: 120px;
+}
+.pd-metric b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--ink);
+}
+.pd-metric span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+.pd-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 32px);
+  color: var(--ink);
+  margin: 56px 0 16px;
+  scroll-margin-top: 32px;
+  text-wrap: balance;
+}
+.pd-content h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--ink);
+  margin: 56px 0 16px;
+  scroll-margin-top: 32px;
+  text-wrap: balance;
+}
+.pd-content p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-dim);
+  margin-bottom: 14px;
+  text-wrap: pretty;
+}
+.pd-content ul {
+  margin: 12px 0 14px 20px;
+}
+.pd-content li {
+  font-size: 15.5px;
+  color: var(--ink-dim);
+  line-height: 1.75;
+}
+.pd-content .frame {
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin: 28px 0;
+  background: var(--bg-card);
+}
+.pd-content .frame img {
+  cursor: zoom-in;
+  width: 100%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+.pd-content .frame:hover img {
+  transform: scale(1.03);
+}
+.pd-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+.pd-gallery img {
+  width: 100%;
+  aspect-ratio: 16/11;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  cursor: zoom-in;
+  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+.pd-gallery img:hover {
+  transform: scale(1.03);
+}
+.pd-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 56px;
+  padding: 12px 20px;
+  border: 1px solid var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.pd-next:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.pd-state {
+  padding: 140px 0;
+  text-align: center;
+  color: var(--ink-dim);
+  font-family: var(--font-mono);
+}
+
+.pd-toc {
+  padding: 44px 0 0 18px;
+  border-left: 1px solid var(--line);
+  align-self: start;
+  position: sticky;
+  top: 24px;
+}
+.pd-toc nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pd-toc a {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  padding: 6px 0;
+  transition: color 0.2s ease;
+}
+.pd-toc a:hover,
+.pd-toc a.active {
+  color: var(--accent);
+}
+@media (max-width: 900px) {
+  .pd-layout { grid-template-columns: 1fr; }
+  .pd-toc { display: none; }
+}
+
+.pd-back-to-top {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 70;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.pd-back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.pd-back-to-top svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: rgba(0, 0, 0, 0.85);
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  cursor: zoom-out;
+}
+.lightbox-overlay img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  cursor: default;
+}
+.lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 96;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+.lightbox-close svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+@media (max-width: 720px) {
+  .pd-gallery { grid-template-columns: 1fr; }
+}

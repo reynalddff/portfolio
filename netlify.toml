@@ -1,3 +1,8 @@
 [build]
-  command = "cd case-study-app && npm install && npm run build && cd .. && rm -rf case-study side-project && cp -r case-study-app/dist case-study && cp -r case-study-app/dist side-project && rm -rf case-study-app/node_modules"
-  publish = "."
+  command = "cd case-study-app && npm install && npm run build"
+  publish = "case-study-app/dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

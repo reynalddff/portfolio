@@ -11,6 +11,21 @@ function assetUrl(asset) {
   return url ? `https:${url}` : undefined
 }
 
+export async function fetchList(contentType) {
+  const { items } = await contentful.getEntries({
+    content_type: contentType,
+    order: contentType === 'caseStudy' ? '-fields.year' : undefined,
+    select: ['fields.title', 'fields.summary', 'fields.slug', 'fields.coverImage'],
+    include: 1,
+  })
+  return items.map(({ fields: f }) => ({
+    title: f.title,
+    slug: f.slug,
+    summary: f.summary,
+    coverImage: assetUrl(f.coverImage),
+  }))
+}
+
 export async function fetchEntry(contentType, slug) {
   const { items } = await contentful.getEntries({
     content_type: contentType,

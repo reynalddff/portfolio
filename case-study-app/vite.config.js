@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Deployed at https://reynald-portfolio.netlify.app/case-study/
+// Unified app: serves the whole site (/, /case-study/:slug, /side-project/:slug) at the domain root.
 export default defineConfig({
   plugins: [react()],
-  base: '/case-study/',
+  base: '/',
 })
