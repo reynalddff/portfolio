@@ -1,0 +1,107 @@
+.nf {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  display: grid;
+  grid-template-columns: 1fr 340px;
+}
+
+/* ---------- left ---------- */
+.nf-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 64px 56px;
+}
+.nf-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(38px, 6vw, 70px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.nf-sub {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--ink-dim);
+}
+.nf-sign {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 8px;
+}
+.nf-sign-rule {
+  width: 72px;
+  height: 1px;
+  background: var(--ink-ghost);
+}
+.nf-sign-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* ---------- right rail ---------- */
+.nf-rail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--line);
+}
+.nf-rail-label {
+  padding: 0 0 22px 56px;
+}
+.nf-rail-link {
+  padding: 30px 0 30px 56px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.nf-rail-link:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.nf-rail-link:hover,
+.nf-rail-link:focus-visible {
+  background: var(--bg-hover);
+  color: var(--accent-hover);
+}
+
+@media (max-width: 720px) {
+  .nf {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 56px;
+    padding: 72px 0;
+  }
+  .nf-main {
+    padding: 0 24px;
+    gap: 22px;
+  }
+  .nf-rail {
+    border-left: none;
+  }
+  .nf-rail-label {
+    padding: 0 24px 18px;
+  }
+  .nf-rail-link {
+    padding: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-rail-link {
+    transition: none;
+  }
+}

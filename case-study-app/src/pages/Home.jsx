@@ -188,6 +188,22 @@ export default function Home() {
     return () => { document.body.style.overflow = '' }
   }, [showIntro])
 
+  // Arriving at /#contact (from the 404 rail, or any external link) can't rely on
+  // the browser's native anchor jump — React has not rendered the target yet on load.
+  // Two things have to settle first, or the target moves out from under the scroll:
+  // the frame (issued inside the mount commit, the scroll races the browser's own
+  // load handling and loses), and both Contentful lists, since the cards and the
+  // whole side-projects section appear from nothing and push everything below them
+  // down. Smoothing is left to html { scroll-behavior }, which already flips to
+  // auto under reduced motion.
+  useEffect(() => {
+    if (showIntro || caseStudies === null || sideProjects === null) return
+    const el = document.getElementById(window.location.hash.slice(1))
+    if (!el) return
+    const raf = requestAnimationFrame(() => el.scrollIntoView())
+    return () => cancelAnimationFrame(raf)
+  }, [showIntro, caseStudies, sideProjects])
+
   return (
     <>
       {showIntro && <IntroLoader onDone={handleIntroDone} />}

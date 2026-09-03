@@ -2,7 +2,20 @@
   command = "cd case-study-app && npm install && npm run build"
   publish = "case-study-app/dist"
 
+# Real routes rewrite to the SPA shell with a 200.
+[[redirects]]
+  from = "/case-study/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/side-project/*"
+  to = "/index.html"
+  status = 200
+
+# Everything else still renders the app (which routes to the 404 page), but
+# answers with a 404 status so crawlers don't index it as a real page.
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200
+  status = 404
