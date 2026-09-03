@@ -25,15 +25,15 @@ B2B product design that moves metrics with AI-native workflows, not just screens
 - Primary and secondary CTA: email (`mailto:reynalddaffa.dev@gmail.com`) is primary; the linked resume doc is the secondary fallback for visitors not ready to reach out directly.
 - The line a visitor remembers after 10 seconds: this designer ships work that moves real business numbers (Rp6B+ GMV, a 200% conversion lift) and has named colleagues vouching for it.
 - Belief ladder: (1) this person understands B2B/SaaS/fintech complexity, not just visual polish → (2) their design work survives engineering handoff → (3) it moves metrics that matter to the business → (4) named managers and peers already vouch for that → (5) reaching out is worth the hiring manager's time.
-- Proof on hand: three named, quoted testimonials with title (`homepage.js:31-38` — a Senior Product Manager, a Product Manager, and a peer Product Designer, all from FLIK), quantified case-study results (`detail-case-study.html:118-122` — Rp6B+ GMV, 60% GMV increase, 3–4wk launch), and a work-history/education timeline on the homepage About section.
+- Proof on hand: three named, quoted testimonials with title (`case-study-app/src/pages/Home.jsx`, the `TESTIMONIALS` const — a Senior Product Manager, a Product Manager, and a peer Product Designer, all from FLIK), quantified case-study results pulled from Contentful onto each detail page (Rp6B+ GMV, 60% GMV increase, 3–4wk launch), and a work-history/education timeline in the homepage About section.
 
 ## Brand Personality
 
-Bold, confident, direct — matching the site's existing neo-brutalist visual system as-is: loud all-caps Anton display type, thick hard-edged borders, offset drop shadows, no hedging in the copy or the layout.
+Considered, confident, direct — matching the site's editorial visual system as-is: Instrument Serif display type over IBM Plex Mono labels, hairline rules instead of heavy borders, warm paper tones, no hedging in the copy or the layout. See DESIGN.md.
 
 ## Anti-references
 
-None specified. The current neo-brutalist direction is the reference to protect and extend, not a departure point.
+The prior neo-brutalist direction, preserved on the `neo-brutalism` branch. The current editorial system is the reference to protect and extend; do not mix the two.
 
 ## Design Principles
 
