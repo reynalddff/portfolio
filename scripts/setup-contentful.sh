@@ -197,13 +197,13 @@ else
   fi
 fi
 
-# ── Stage 2: GitHub Pages ──────────────────────────────────────────────────
-stage "GitHub Pages — enable"
-say "Turns the repo into a live site at https://reynalddff.github.io/portfolio/"
-open_url "https://github.com/reynalddff/portfolio/settings/pages"
-step "Under 'Build and deployment' → Source, choose 'Deploy from a branch'."
-step "Branch: $BRANCH_NAME, folder: / (root). Save."
-pause "Press Enter once saved (first deploy takes ~1 min)..."
+# ── Stage 2: hosting ───────────────────────────────────────────────────────
+stage "Hosting — Netlify"
+say "The site is a Vite app that Netlify builds from source (see netlify.toml),"
+say "so there is no static output in the repo for GitHub Pages to serve."
+say "If the Netlify site does not exist yet, set it up first:"
+note "  scripts/setup-netlify.sh"
+pause "Press Enter once the site is on Netlify..."
 
 # ── Stage 3: Contentful space ──────────────────────────────────────────────
 stage "Contentful — create space"
@@ -251,32 +251,23 @@ pause "Press Enter once you have the token..."
 CONTENTFUL_ACCESS_TOKEN=""
 ask_secret CONTENTFUL_ACCESS_TOKEN "Content Delivery API access token:"
 
-# ── Stage 6: wire tokens into the app + homepage ───────────────────────────
-stage "Tokens — wire into the app + homepage"
+# ── Stage 6: wire tokens into the app ──────────────────────────────────────
+stage "Tokens — wire into the app"
 write_env "VITE_CONTENTFUL_SPACE_ID" "$CONTENTFUL_SPACE_ID"
 write_env "VITE_CONTENTFUL_ENVIRONMENT" "master"
 write_env "VITE_CONTENTFUL_ACCESS_TOKEN" "$CONTENTFUL_ACCESS_TOKEN"
-say "homepage.js has no build step, so its Contentful config is plain strings —"
-say "the space ID is not secret, but the access token is embedded the same way"
-say "Contentful expects for client-side delivery reads."
-if grep -q "your-space-id" homepage.js; then
-  sed -i.bak \
-    -e "s/your-space-id/${CONTENTFUL_SPACE_ID}/" \
-    -e "s/your-delivery-api-token/${CONTENTFUL_ACCESS_TOKEN}/" \
-    homepage.js && rm -f homepage.js.bak
-  note "✓ updated Contentful config in homepage.js"
-else
-  note "homepage.js already updated, or placeholders not found — check it manually."
-fi
+say "The whole site is one Vite app now, so these three vars are the only place"
+say "Contentful config lives. The space ID is not secret, and the access token is"
+say "embedded the same way Contentful expects for client-side delivery reads."
+say "Netlify needs the same three set in its own build environment:"
+note "  https://app.netlify.com → Site configuration → Environment variables"
 
-# ── Stage 7: build + deploy the case-study app ─────────────────────────────
-stage "Build case-study-app → commit static output"
-say "One-time manual build (no CI, per your call earlier) — repeat this stage"
-say "whenever you change case-study-app's code, NOT when you edit content in Contentful."
+# ── Stage 7: build check ───────────────────────────────────────────────────
+stage "Build check"
+say "Netlify builds from source on push (see netlify.toml), so nothing built"
+say "here gets committed. This run is just to catch a broken build early."
 (cd case-study-app && npm install --silent && npm run build)
-rm -rf case-study
-cp -r case-study-app/dist case-study
-note "✓ built into ./case-study"
+note "✓ build passes"
 git add -A
 if confirm "Commit and push everything now?"; then
   git commit -m "Wire up Contentful space + deploy case-study app" || note "nothing to commit"
@@ -289,10 +280,10 @@ fi
 stage "Verify — see it live"
 say "Homepage's case-study grid will look empty until at least one Case Study"
 say "entry exists AND is published — add one now if you haven't."
-open_url "https://reynalddff.github.io/portfolio/"
+open_url "https://uxreynald.netlify.app/"
 open_url "https://app.contentful.com/spaces/${CONTENTFUL_SPACE_ID}/entries"
 say "Once you've published an entry, test its detail page:"
-note "  https://reynalddff.github.io/portfolio/case-study/?slug=<its-slug>"
+note "  https://uxreynald.netlify.app/case-study/<its-slug>"
 pause "Press Enter when you've confirmed both pages load..."
 
 finish

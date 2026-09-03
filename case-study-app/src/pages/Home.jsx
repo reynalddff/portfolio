@@ -5,8 +5,8 @@ import HeroCanvas from '../components/HeroCanvas'
 import IntroLoader from '../components/IntroLoader'
 import '../styles/Home.css'
 
-// Real testimonials, carried over from the pre-React homepage (homepage.js).
-// All three are FLIK colleagues; the source data has no company field of its own.
+// Real testimonials, carried over from the pre-React static homepage.
+// All three are FLIK colleagues; the original data had no company field of its own.
 const TESTIMONIALS = [
   {
     name: 'Kandika Bagaskara',
