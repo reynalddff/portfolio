@@ -42,9 +42,9 @@
   --dark-ink-dim: oklch(0.80 0.010 78);
   --dark-ink-faint: oklch(0.68 0.010 76);
 
-  --font-body: 'IBM Plex Mono', monospace;
-  --font-mono: 'IBM Plex Mono', monospace;
-  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'Space Grotesk', sans-serif;
+  --font-display: 'Source Serif 4', Georgia, serif;
 
   --ease: cubic-bezier(0.22, 0.61, 0.24, 1);
 }

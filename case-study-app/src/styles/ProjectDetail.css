@@ -29,7 +29,7 @@
   margin: 0 auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 1fr 150px;
+  grid-template-columns: 1fr 200px;
   gap: 24px;
 }
 
@@ -239,6 +239,9 @@
   color: var(--ink-faint);
   padding: 6px 0;
   transition: color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .pd-toc a:hover,
 .pd-toc a.active {

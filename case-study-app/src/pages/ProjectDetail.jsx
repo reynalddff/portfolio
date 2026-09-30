@@ -41,7 +41,7 @@ function Toc({ items, activeId }) {
     <aside className="pd-toc">
       <nav aria-label="Table of contents">
         {items.map(item => (
-          <a key={item.id} className={activeId === item.id ? 'active' : ''} href={`#${item.id}`}>
+          <a key={item.id} className={activeId === item.id ? 'active' : ''} href={`#${item.id}`} title={item.text}>
             {item.text}
           </a>
         ))}

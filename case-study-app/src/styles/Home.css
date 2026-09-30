@@ -55,7 +55,7 @@
 }
 .home-nav-links a {
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--ink-body);
   transition: color 0.5s ease;
@@ -247,7 +247,7 @@
 }
 .proj-summary {
   font-family: var(--font-mono);
-  font-size: 13.5px;
+  font-size: 16px;
   line-height: 1.75;
   color: var(--ink-dim);
   text-wrap: pretty;
@@ -358,7 +358,7 @@
 .testimonial-quote {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1.45;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -380,9 +380,6 @@
   }
   .testimonial {
     padding: 36px 24px;
-  }
-  .testimonial-quote {
-    font-size: 19px;
   }
 }
 
@@ -429,7 +426,7 @@
 }
 .side-card-summary {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.72;
   color: var(--ink-soft);
   text-wrap: pretty;
@@ -507,7 +504,7 @@
 }
 .about-body {
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 14px;
   line-height: 1.85;
   color: var(--dark-ink-dim);
   text-wrap: pretty;
@@ -535,22 +532,22 @@
   border-bottom: 1px solid var(--dark-line);
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 6px;
 }
 .timeline-when {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   color: var(--dark-ink-faint);
 }
 .timeline-what {
   font-family: var(--font-mono);
-  font-size: 13.5px;
+  font-size: 16px;
   color: var(--dark-ink);
 }
 .timeline-sub {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 14px;
   color: var(--dark-ink-faint);
 }
 @media (max-width: 720px) {
@@ -627,7 +624,7 @@
 }
 .contact-note {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.7;
   color: var(--dark-ink-dim);
 }
@@ -637,7 +634,7 @@
 .link-row {
   padding: 13px 0;
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 14px;
   color: var(--dark-ink-dim);
   transition: color 0.42s ease, transform 0.42s ease;
 }
@@ -655,7 +652,9 @@
   text-align: center;
 }
 @media (max-width: 720px) {
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .contact-grid > * { padding: 36px 24px; }
+  .contact-hello .serif-heading { font-size: 26px; overflow-wrap: anywhere; }
 }
 
 /* ---------- intro loader ---------- */

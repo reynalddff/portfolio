@@ -6,24 +6,20 @@ import IntroLoader from '../components/IntroLoader'
 import '../styles/Home.css'
 
 // Real testimonials, carried over from the pre-React static homepage.
-// All three are FLIK colleagues; the original data had no company field of its own.
 const TESTIMONIALS = [
   {
     name: 'Kandika Bagaskara',
     role: 'Senior Product Manager',
-    company: 'FLIK',
     quote: 'I had the pleasure of working with Daffa at FLIK, where he was part of my team as a Product Designer. He consistently delivered high-quality work at speed, with great attention to detail. His openness to grow into an Associate Product Manager role showed real adaptability and drive.',
   },
   {
     name: 'Reza Dwi Cahyo',
     role: 'Product Manager',
-    company: 'FLIK',
     quote: 'I worked with Daffa on the Merchant Dashboard project at FLIK, where he was Product Designer. He brought strong attention to detail and solid design thinking, and was always easy to collaborate with.',
   },
   {
     name: 'Raam Pujangga Sadewa',
     role: 'Product Designer',
-    company: 'FLIK',
     quote: 'I worked with Daffa as a peer Product Designer at FLIK, collaborating closely on research and building our design system. He was thoughtful, detail-oriented, and great to build with.',
   },
 ]
@@ -244,7 +240,7 @@ export default function Home() {
               {TESTIMONIALS.map((t) => (
                 <figure key={t.name} className="testimonial">
                   <blockquote className="testimonial-quote">{t.quote}</blockquote>
-                  <figcaption className="testimonial-who">{t.name} — {t.role}, {t.company}</figcaption>
+                  <figcaption className="testimonial-who">{t.name} — {t.role}</figcaption>
                 </figure>
               ))}
             </div>
@@ -276,10 +272,10 @@ export default function Home() {
               <div>
                 <div className="eyebrow dark">Experience</div>
                 <div className="timeline">
-                  <div className="timeline-row"><div className="timeline-when">2026</div><div className="timeline-what">Product Designer · eDOT</div></div>
-                  <div className="timeline-row"><div className="timeline-when">2025 – 2026</div><div className="timeline-what">Associate Product Manager · FLIK</div></div>
-                  <div className="timeline-row"><div className="timeline-when">2023 – 2026</div><div className="timeline-what">Product Designer · FLIK</div></div>
-                  <div className="timeline-row"><div className="timeline-when">2022</div><div className="timeline-what">Associate UI/UX Designer · SIRCLO</div></div>
+                  <div className="timeline-row"><div className="timeline-when">2026</div><div className="timeline-what">Product Designer</div><div className="timeline-sub">eDOT</div></div>
+                  <div className="timeline-row"><div className="timeline-when">2025 – 2026</div><div className="timeline-what">Associate Product Manager</div><div className="timeline-sub">FLIK</div></div>
+                  <div className="timeline-row"><div className="timeline-when">2023 – 2026</div><div className="timeline-what">Product Designer</div><div className="timeline-sub">FLIK</div></div>
+                  <div className="timeline-row"><div className="timeline-when">2022</div><div className="timeline-what">Associate UI/UX Designer</div><div className="timeline-sub">SIRCLO</div></div>
                 </div>
               </div>
               <div>
@@ -287,11 +283,11 @@ export default function Home() {
                 <div className="timeline">
                   <div className="timeline-row">
                     <div className="timeline-when">2024 – 2026</div>
-                    <div><div className="timeline-what">Master of Information Technology</div><div className="timeline-sub">University of Indonesia</div></div>
+                    <div className="timeline-what">Master of Information Technology</div><div className="timeline-sub">University of Indonesia</div>
                   </div>
                   <div className="timeline-row">
                     <div className="timeline-when">2016 – 2020</div>
-                    <div><div className="timeline-what">Bachelor of Computer Science</div><div className="timeline-sub">University of Brawijaya</div></div>
+                    <div className="timeline-what">Bachelor of Computer Science</div><div className="timeline-sub">University of Brawijaya</div>
                   </div>
                 </div>
               </div>
@@ -311,7 +307,7 @@ export default function Home() {
               <div className="contact-elsewhere">
                 <div className="eyebrow dark">Elsewhere</div>
                 <div className="timeline">
-                  <a className="timeline-row link-row" href="https://drive.google.com/file/d/1MIBLR-9YFL-308-YHAT5PF2SWsGX9Zvk/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé (PDF) ↗</a>
+                  <a className="timeline-row link-row" href="https://drive.google.com/file/d/1YVP8-QTNn9wZzlxFwswEAyb1H3S6_uhX/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé (PDF) ↗</a>
                   <a className="timeline-row link-row" href="https://www.linkedin.com/in/reynalddaffa/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
                   <a className="timeline-row link-row" href="https://github.com/reynalddff" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
                   <a className="timeline-row link-row" href="https://www.instagram.com/reynalddaffa/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
